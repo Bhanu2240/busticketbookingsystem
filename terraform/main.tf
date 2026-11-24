@@ -1,19 +1,16 @@
 
 provider "aws" {
-  region = "ap-south-1"
+  region = var.aws_region
 }
 
 resource "aws_instance" "bus_ticket_server" {
-  ami                    = "ami-032eca770b5d15e72"
-  instance_type          = "t3.micro"
-  subnet_id              = "subnet-0a87ba5492aaa88c5"
-  key_name               = "BusTicketBooking-Key"
-
-  vpc_security_group_ids = [
-    "sg-00ae73192b86d65c8"
-  ]
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  subnet_id              = var.subnet_id
+  key_name               = var.key_name
+  vpc_security_group_ids = var.security_group_ids
 
   tags = {
-    Name = "BusTicketBooking-DevOps-Server"
+    Name = var.instance_name
   }
 }
